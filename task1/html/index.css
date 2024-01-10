@@ -1,0 +1,27 @@
+h1 {
+  text-align: center;
+  color: black;
+  line-height: 100px;
+  margin: 0;
+}
+.container {
+  display: flex;
+  justify-content: center;
+}
+.item {
+  display: flex;
+  justify-content: center;
+  width: 200px;
+  height: 300px;
+  border: 1px solid black;
+  padding: 50px 150px 200px 150px;
+}
+.item_1 {
+  background: rgb(201, 230, 201);
+  flex-wrap: wrap;
+  font-size: 1.3rem;
+  line-height: 10rem;
+}
+.item_2 {
+  background: rgb(250, 218, 223);
+}
