@@ -10,10 +10,5 @@ const result2 = array2.filter((item) => item.age > 20);
 console.log(result2);
 
 let array4 = ["table", "name", "city", "train", "village"];
-let result = [];
-for (let str of array4) {
-  if (str.startsWith("t") === true) {
-    result.push(str);
-  }
-}
-console.log(result.join());
+array4 = array4.filter(str => str.startsWith('t'));
+console.log(array4.join());
