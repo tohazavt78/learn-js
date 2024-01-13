@@ -6,13 +6,17 @@ h1 {
 }
 .container {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  margin: auto;
+  flex-wrap: wrap;
+  width: 900px;
+  height: 600px;
 }
 .item {
   display: flex;
   justify-content: center;
-  width: 200px;
-  height: 300px;
+  width: 210px;
+  height: 350px;
   border: 1px solid black;
   padding: 120px  ;
 }
@@ -20,7 +24,7 @@ h1 {
   background: rgb(201, 230, 201);
   flex-wrap: wrap;
   font-size: 1.3rem;
-  line-height: 10rem;
+  line-height: 15rem;
 }
 .item_2 {
   background: rgb(250, 218, 223);
