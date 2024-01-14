@@ -1,31 +1,42 @@
-h1 {
+.header {
   text-align: center;
   color: black;
-  line-height: 100px;
-  margin: 0;
+  height: 100px;
+}
+.main-container{
+  display: flex;
+  height: 80vh;
+  justify-content: center;
 }
 .container {
   display: flex;
-  flex-direction: column;
-  margin: auto;
-  flex-wrap: wrap;
-  width: 900px;
-  height: 600px;
 }
-.item {
+.black-puppy {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  background-color: rgb(184, 239, 204);
+  border: 1px solid black;
+  padding: 50px;
+  width: 50%;
+  height: 80%;
+}
+.answer{
+  font-size: 20px;
+}
+img{
+  width: 300px;
+  height: 250px;
+  object-fit: cover;
+}
+.white-puppy {
   display: flex;
   justify-content: center;
-  width: 210px;
-  height: 350px;
+  background-color: rgb(250, 225, 229);
   border: 1px solid black;
-  padding: 120px  ;
-}
-.item_1 {
-  background: rgb(201, 230, 201);
-  flex-wrap: wrap;
-  font-size: 1.3rem;
-  line-height: 15rem;
-}
-.item_2 {
-  background: rgb(250, 218, 223);
+  padding: 50px;
+  width: 50%;
+  height: 80%;
 }
