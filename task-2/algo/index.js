@@ -19,9 +19,8 @@ console.log(uniqueNums);
 
 let mapResponse = (response) => {
   return response.map((item) => ({
-    id: item.id,
+  ...item,
     name: item.name || item.id,
-    value: item.value,
   }));
 };
 const info = [
