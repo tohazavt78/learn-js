@@ -19,7 +19,7 @@ console.log(uniqueNums);
 
 let mapResponse = (response) => {
   return response.map((item) => ({
-  ...item,
+    ...item,
     name: item.name || item.id,
   }));
 };
@@ -34,22 +34,22 @@ const group = [
   { name: "Anna", age: 13 },
   { name: "Nina", age: 55 },
 ];
-let getSortedChildren = (people, order = "DSC") => {
-  const filteredChildren = people.filter(
-    (person) => person.age <= 18
-  );
+
+let getSortedChildren = (people, order) => {
+  const filteredChildren = people.filter((person) => person.age <= 18);
 
   const sortedChildren = filteredChildren.sort((a, b) => {
-    if (order === "DSC") {
-      return a.age - b.age;
-    }
-    if (order === "ASC") {
+    if (order === "DESC") {
       return b.age - a.age;
     }
-  })
+    if (order === "ASC") {
+      return a.age - b.age;
+    }
+  });
 
   return sortedChildren.map((child) => child.name).join(", ");
 };
+
 console.log(getSortedChildren(group));
 console.log(getSortedChildren(group, "ASC"));
-console.log(getSortedChildren(group, "DSC"));
+console.log(getSortedChildren(group, "DESC"));
