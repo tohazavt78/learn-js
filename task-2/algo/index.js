@@ -50,6 +50,6 @@ let getSortedChildren = (people, order = "DSC") => {
 
   return sortedChildren.map((child) => child.name).join(", ");
 };
-console.log(getSortedChildren(peoples));
-console.log(getSortedChildren(peoples, "ASC"));
-console.log(getSortedChildren(peoples, "DSC"));
+console.log(getSortedChildren(group));
+console.log(getSortedChildren(group, "ASC"));
+console.log(getSortedChildren(group, "DSC"));
