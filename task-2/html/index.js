@@ -1,4 +1,4 @@
-const questions = [
+const QUESTIONS = [
   {
     question: "Выберите собаку?",
     answer: {
@@ -44,38 +44,38 @@ const questions = [
 ];
 
 let questionIndex = 0;
-let correctAnswer = questions[questionIndex]["correct"];
+let correctAnswer = QUESTIONS[questionIndex]["correct"];
 let answerA = document.getElementById("answer-A");
 let answerB = document.getElementById("answer-B");
 let textA = document.getElementById("text-A");
 let textB = document.getElementById("text-B");
-const correctAnswerMessage = "Вы ответили верно!";
+const CORRECT_ANSWER_MESSAGE = "Вы ответили верно!";
 
 showQuestion(questionIndex);
 
 function showQuestion() {
   document.getElementById("question").innerHTML =
-    questions[questionIndex]["question"];
+    QUESTIONS[questionIndex]["question"];
   document
     .getElementById("image-A")
-    .setAttribute("src", questions[questionIndex]["answer"].a.image);
+    .setAttribute("src", QUESTIONS[questionIndex]["answer"].a.image);
   document
     .getElementById("image-B")
-    .setAttribute("src", questions[questionIndex]["answer"].b.image);
+    .setAttribute("src", QUESTIONS[questionIndex]["answer"].b.image);
   document.getElementById("answer-A-label").innerHTML =
-    questions[questionIndex]["answer"].a.label;
+    QUESTIONS[questionIndex]["answer"].a.label;
   document.getElementById("answer-B-label").innerHTML =
-    questions[questionIndex]["answer"].b.label;
-  correctAnswer = questions[questionIndex]["correct"];
+    QUESTIONS[questionIndex]["answer"].b.label;
+  correctAnswer = QUESTIONS[questionIndex]["correct"];
 }
 
 function onRightAnswerClick() {
   if (correctAnswer == "A") {
-    textA.innerHTML = correctAnswerMessage;
+    textA.innerHTML = CORRECT_ANSWER_MESSAGE;
     answerA.style.background = "#E3FFEE";
   }
   if (correctAnswer == "B") {
-    textB.innerHTML = correctAnswerMessage;
+    textB.innerHTML = CORRECT_ANSWER_MESSAGE;
     answerB.style.background = "#E3FFEE";
   }
   setTimeout(() => {
@@ -84,10 +84,10 @@ function onRightAnswerClick() {
       answerA.style.background = "";
     }
     if (correctAnswer == "B") {
-      textB.innerHTML = correctAnswerMessage;
+      textB.innerHTML = '';
       answerB.style.background = "#E3FFEE";
     }
-    if (questionIndex !== questions.length - 1) {
+    if (questionIndex !== QUESTIONS.length - 1) {
       showQuestion(questionIndex++);
     } else {
       window.location.href = "finalPage.html";
