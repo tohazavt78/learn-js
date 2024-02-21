@@ -1,6 +1,6 @@
 let fruitsForYana = ["apple", "pineapple", "kiwi"];
 let fruitsForAnna = ["banana", "apple", "kiwi", "orange"];
-let commonFruits = fruitsForAnna
+let differentFruits = fruitsForAnna
   .filter((item) => {
     return !fruitsForYana.includes(item);
   })
@@ -9,7 +9,7 @@ let commonFruits = fruitsForAnna
       return !fruitsForAnna.includes(item);
     })
   );
-console.log(commonFruits);
+console.log(differentFruits);
 
 let nums1 = [1, 2, 3];
 let nums2 = [3, 4, 5];

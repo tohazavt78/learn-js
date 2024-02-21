@@ -1,13 +1,13 @@
 const questions = [
   {
-    question: "Выберите собаку",
+    question: "Выберите собаку?",
     answer: {
       a: {
-        label: "Вы ответили верно!",
+        label: "",
         image: "images/blackpuppy.jpg",
       },
       b: {
-        label: "Попробуйте ещё раз",
+        label: "",
         image: "images/whitepuppy.jpg",
       },
     },
@@ -17,11 +17,11 @@ const questions = [
     question: "Чем обработать собаку от клещей?",
     answer: {
       a: {
-        label: "Вы ответили верно!",
+        label: "А) Таблетки Бравекто ",
         image: "images/bravecto.jpg",
       },
       b: {
-        label: "Попробуйте ещё раз",
+        label: "Б) Капли Барс",
         image: "images/bars.jpg",
       },
     },
@@ -31,11 +31,11 @@ const questions = [
     question: "Каким кормом кормить собаку?",
     answer: {
       a: {
-        label: "Попробуйте ещё раз",
+        label: "А) Педигри",
         image: "images/pedigree.jpg",
       },
       b: {
-        label: "Вы ответили верно!",
+        label: "Б) Грандорф",
         image: "images/grandorf.jpg",
       },
     },
@@ -49,6 +49,7 @@ let answerA = document.getElementById("answer-A");
 let answerB = document.getElementById("answer-B");
 let textA = document.getElementById("text-A");
 let textB = document.getElementById("text-B");
+const correctAnswerMessage = "Вы ответили верно!";
 
 showQuestion(questionIndex);
 
@@ -61,35 +62,45 @@ function showQuestion() {
   document
     .getElementById("image-B")
     .setAttribute("src", questions[questionIndex]["answer"].b.image);
+  document.getElementById("answer-A-label").innerHTML =
+    questions[questionIndex]["answer"].a.label;
+  document.getElementById("answer-B-label").innerHTML =
+    questions[questionIndex]["answer"].b.label;
   correctAnswer = questions[questionIndex]["correct"];
 }
 
 function onRightAnswerClick() {
   if (correctAnswer == "A") {
-    textA.innerHTML = questions[questionIndex]["answer"].a.label;
+    textA.innerHTML = correctAnswerMessage;
     answerA.style.background = "#E3FFEE";
-    setTimeout(() => {
-      textA.innerHTML = "";
-      answerA.style.background = "";
-    }, 3000);
   }
   if (correctAnswer == "B") {
-    textB.innerHTML = questions[questionIndex]["answer"].b.label;
+    textB.innerHTML = correctAnswerMessage;
     answerB.style.background = "#E3FFEE";
-    setTimeout(() => {
-      textB.innerHTML = "";
-      answerB.style.background = "";
-    }, 3000);
   }
-  questionIndex !== questions.length - 1
-    ? setTimeout(() => showQuestion(questionIndex++), 3000)
-    : setTimeout(() => (window.location.href = "finalPage.html"), 3000);
+  setTimeout(() => {
+    if (correctAnswer == "A") {
+      textA.innerHTML = "";
+      answerA.style.background = "";
+    }
+    if (correctAnswer == "B") {
+      textB.innerHTML = correctAnswerMessage;
+      answerB.style.background = "#E3FFEE";
+    }
+    if (questionIndex !== questions.length - 1) {
+      showQuestion(questionIndex++);
+    } else {
+      window.location.href = "finalPage.html";
+    }
+  }, 3000);
 }
 
 function onWrongAnswerClick() {
-  correctAnswer !== "A"
-    ? (answerA.style.background = "#FFEAE3")
-    : (answerB.style.background = "#FFEAE3");
+  if (correctAnswer !== "A") {
+    answerA.style.background = "#FFEAE3";
+  } else {
+    answerB.style.background = "#FFEAE3";
+  }
   setTimeout(() => {
     answerA.style.background = "";
     answerB.style.background = "";
@@ -98,5 +109,9 @@ function onWrongAnswerClick() {
 }
 
 function onAnswerClick(answer) {
-  answer == correctAnswer ? onRightAnswerClick() : onWrongAnswerClick();
+  if (answer == correctAnswer) {
+    onRightAnswerClick();
+  } else {
+    onWrongAnswerClick();
+  }
 }

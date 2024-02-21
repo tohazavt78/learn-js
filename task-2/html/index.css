@@ -1,33 +1,35 @@
 .question-header {
   text-align: center;
-  color: black;
-  font-size: 30px;
+  font-size: 36px;
+  margin: 10px;
+  font-weight: bold;
+  font-family: "News Cycle";
 }
 
 .main-container {
   display: flex;
-  height: 85vh;
+  height: 90vh;
   justify-content: center;
 }
 .main {
   display: flex;
-  height: 100%;
+  margin: 0 100px;
+  height: 90vh;
   flex-direction: column;
   align-items: center;
-  border: 1px solid black;
   background-color: #e3ffee;
 }
 
 .congrats {
   color: black;
   margin: 40px 0 20px;
-  font-size: 30px;
+  font-size: 35px;
 }
 
 .choice {
   display: flex;
   width: 90%;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 .variant {
   display: flex;
@@ -43,15 +45,17 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 450px;
-  height: 550px;
+  justify-content: space-between;
+  width: 500px;
+  height: 600px;
   background-color: #f0efef;
-  border: 1px solid black;
+  border: 1px solid white;
 }
 
 .answer-text {
   font-size: 20px;
   font-weight: bold;
+  justify-self: flex-end;
 }
 
 .question-image {
@@ -59,22 +63,20 @@
   object-fit: cover;
   width: 330px;
   height: 250px;
-  border: 1px solid black;
 }
 
 .variant-image {
-  margin: 70px 0 30px 0;
+  margin-top: 70px;
   object-fit: cover;
-  width: 330px;
-  height: 250px;
-  border: 1px solid black;
+  width: 250px;
+  height: 175px;
 }
 
 .variant-text {
   font-size: 20px;
-  font-weight: bold;
+  margin-top: 5px;
 }
 .reward-text {
-  font-size: 40px;
-  font-weight: bold;
+  font-size: 26px;
+  margin: 70px;
 }
