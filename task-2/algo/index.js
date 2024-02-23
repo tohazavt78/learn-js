@@ -37,17 +37,16 @@ const group = [
 
 let getSortedChildren = (people, order) => {
   const filteredChildren = people.filter((person) => person.age <= 18);
-
-  const sortedChildren = filteredChildren.sort((a, b) => {
-    if (order === "DESC") {
-      return b.age - a.age;
-    }
-    if (order === "ASC") {
-      return a.age - b.age;
-    }
-  });
-
-  return sortedChildren.map((child) => child.name).join(", ");
+  if (order) {
+    filteredChildren.sort((a, b) => {
+      if (order === "DESC") {
+        return b.name.localeCompare(a.name);
+      } else {
+        return a.name.localeCompare(b.name);
+      }
+    });
+  }
+  return filteredChildren.map((child) => child.name).join(", ");
 };
 
 console.log(getSortedChildren(group));
