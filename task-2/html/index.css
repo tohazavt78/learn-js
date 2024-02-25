@@ -1,0 +1,82 @@
+.question-header {
+  text-align: center;
+  font-size: 36px;
+  margin: 10px;
+  font-weight: bold;
+  font-family: "News Cycle";
+}
+
+.main-container {
+  display: flex;
+  height: 90vh;
+  justify-content: center;
+}
+.main {
+  display: flex;
+  margin: 0 100px;
+  height: 90vh;
+  flex-direction: column;
+  align-items: center;
+  background-color: #e3ffee;
+}
+
+.congrats {
+  color: black;
+  margin: 40px 0 20px;
+  font-size: 35px;
+}
+
+.choice {
+  display: flex;
+  width: 90%;
+  justify-content: space-around;
+}
+.variant {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.container {
+  display: flex;
+}
+
+.answer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  width: 500px;
+  height: 600px;
+  background-color: #f0efef;
+  border: 1px solid white;
+}
+
+.answer-text {
+  font-size: 20px;
+  font-weight: bold;
+  justify-self: flex-end;
+}
+
+.question-image {
+  margin: 70px 0 30px 0;
+  object-fit: cover;
+  width: 330px;
+  height: 250px;
+}
+
+.variant-image {
+  margin-top: 70px;
+  object-fit: cover;
+  width: 250px;
+  height: 175px;
+}
+
+.variant-text {
+  font-size: 20px;
+  margin-top: 5px;
+}
+.reward-text {
+  font-size: 26px;
+  margin: 70px;
+}

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quiz</title>
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <div class="question-header" id="question">
+      <h1></h1>
+    </div>
+    <div class="main-container">
+      <div class="container">
+        <div onclick="onAnswerClick('A')" class="answer" id="answer-A">
+          <img class="question-image" id="image-A" src="" />
+          <h2 id = "answer-A-label"></h2>
+          <p class="answer-text" id="text-A"></p>
+        </div>
+        <div onclick="onAnswerClick('B')" class="answer" id="answer-B">
+          <img class="question-image" id="image-B" src="" />
+          <h2 id = "answer-B-label"></h2>
+          <p class="answer-text" id="text-B"></p>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script src="index.js"></script>
+</html>
