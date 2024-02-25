@@ -40,9 +40,21 @@ let getSortedChildren = (people, order) => {
   if (order) {
     filteredChildren.sort((a, b) => {
       if (order === "DESC") {
-        return b.name.localeCompare(a.name);
+        if (a.name < b.name) {
+          return 1;
+        }
+        if (a.name > b.name) {
+          return -1;
+        }
+        return 0;
       } else {
-        return a.name.localeCompare(b.name);
+        if (a.name < b.name) {
+          return -1;
+        }
+        if (a.name > b.name) {
+          return 1;
+        }
+        return 0;
       }
     });
   }
