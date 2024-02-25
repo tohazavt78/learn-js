@@ -39,24 +39,13 @@ let getSortedChildren = (people, order) => {
   const filteredChildren = people.filter((person) => person.age <= 18);
   if (order) {
     filteredChildren.sort((a, b) => {
-      if (order === "DESC") {
-        if (a.name < b.name) {
-          return 1;
-        }
-        if (a.name > b.name) {
-          return -1;
-        }
-        return 0;
+     if (order === "ASC") {
+        return b.name > a.name ? -1 : 1;
       } else {
-        if (a.name < b.name) {
-          return -1;
-        }
-        if (a.name > b.name) {
-          return 1;
-        }
-        return 0;
+        return b.name < a.name ? -1 : 1;
       }
-    });
+      }
+    );
   }
   return filteredChildren.map((child) => child.name).join(", ");
 };
