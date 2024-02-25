@@ -48,8 +48,7 @@ let getSortedChildren = (people, order) => {
     );
   }
   return filteredChildren.map((child) => child.name).join(", ");
-};
-
+}
 console.log(getSortedChildren(group));
 console.log(getSortedChildren(group, "ASC"));
 console.log(getSortedChildren(group, "DESC"));
