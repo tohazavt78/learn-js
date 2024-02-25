@@ -39,16 +39,15 @@ let getSortedChildren = (people, order) => {
   const filteredChildren = people.filter((person) => person.age <= 18);
   if (order) {
     filteredChildren.sort((a, b) => {
-     if (order === "ASC") {
+      if (order === "ASC") {
         return b.name > a.name ? -1 : 1;
       } else {
         return b.name < a.name ? -1 : 1;
       }
-      }
-    );
+    });
   }
   return filteredChildren.map((child) => child.name).join(", ");
-}
+};
 console.log(getSortedChildren(group));
 console.log(getSortedChildren(group, "ASC"));
 console.log(getSortedChildren(group, "DESC"));
