@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Слова</title>
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <div class="main-container">
+      <div class="header">
+        <p class="header-text" id="addWordPage"><b>Добавление слова</b></p>
+        <p
+          class="header-text"
+          onclick="openPage('dictionary')"
+          id="dictionaryPage"
+        >
+          Словарь
+        </p>
+        <p class="header-text" onclick="openPage('quiz')" id="quizPage">Квиз</p>
+      </div>
+      <div class="container-words">
+        <div class="new-words adding">
+          <p>Слово</p>
+          <input type="text" />
+        </div>
+        <div class="new-words translation">
+          <p>Перевод</p>
+          <input type="text" />
+        </div>
+        <button class="confirm" type="button" onclick="saveData()">
+          <p>Добавить</p>
+        </button>
+      </div>
+    </div>
+    <script src="index.js"></script>
+  </body>
+</html>
