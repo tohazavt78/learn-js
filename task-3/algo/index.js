@@ -21,8 +21,20 @@ const expect = function (val) {
 const sumExceptMaxMin = (numbers) => {
   const minNum = Math.min(...numbers);
   const maxNum = Math.max(...numbers);
+  let minCount = 0;
+  let maxCount = 0;
   let result = numbers.reduce((sum, num) => {
-    if (num !== minNum && num !== maxNum) {
+    if (num === minNum) {
+      minCount++;
+      if (minCount > 1) {
+        return sum + num;
+      }
+    } else if (num === maxNum) {
+      maxCount++;
+      if (maxCount > 1) {
+        return sum + num;
+      }
+    } else {
       return sum + num;
     }
     return sum;
@@ -31,8 +43,10 @@ const sumExceptMaxMin = (numbers) => {
 };
 const num1 = [1, 2, 3, 4, 5];
 const num2 = [5, 3, 5, 4, 8];
+const num3 = [5, 3, 3, 5, 4, 8];
 console.log(sumExceptMaxMin(num1));
 console.log(sumExceptMaxMin(num2));
+console.log(sumExceptMaxMin(num3));
 //3
 const animals = [
   {
@@ -97,16 +111,10 @@ function getRabiesVaccinedAnimals() {
 }
 function mapAnimalsWithVaccines() {
   return animals.map((animal) => {
-    const animalVaccineTypes = vaccines.reduce((newArr, vaccine) => {
-      if (vaccine.animal_id === animal.id) {
-        newArr.push(vaccine.type);
-      }
-      return newArr;
-    }, []);
-    return { ...animal, vaccines: animalVaccineTypes || [] };
+    const animalVaccines = vaccines.filter((vaccine) => vaccine.animal_id === animal.id);
+    return { ...animal, vaccines: animalVaccines || [] };
   });
-}
-console.log(getRabiesVaccinedAnimals());
+}console.log(getRabiesVaccinedAnimals());
 console.log(mapAnimalsWithVaccines());
 //4
 function getRepeatingNumbers(arr) {
@@ -120,7 +128,7 @@ function getRepeatingNumbers(arr) {
 
   return { count, numbers: numbers.map(Number) };
 }
-const num3 = [1, 3, 1, 5, 6, 3, 7, 8, 4, 5, 4, 1];
+const num4 = [1, 3, 1, 5, 6, 3, 7, 8, 4, 5, 4, 1];
 console.log(getRepeatingNumbers(num3));
 //5
 function validateNewUser(user) {
