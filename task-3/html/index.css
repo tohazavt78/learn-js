@@ -1,0 +1,240 @@
+.main-container {
+  display: flex;
+  height: 97vh;
+  width: 99vw;
+  align-content: center;
+  flex-direction: column;
+}
+.header {
+  display: flex;
+  justify-content: center;
+  background-color: #4256d0;
+}
+.header-text {
+  color: #ffffff;
+  margin: 25px 40px;
+  font-size: 24px;
+  font-weight: 400;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+.container-words {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.new-words {
+  margin: 15px;
+}
+.new-words p {
+  font-size: 16px;
+  margin: 5px;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+.new-words input {
+  width: 400px;
+  height: 38px;
+  border-radius: 10px;
+  border-color: #5c73db;
+}
+.confirm {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 400px;
+  height: 38px;
+  background-color: #4763e4;
+  border: 0;
+  border-radius: 10px;
+  margin: 25px;
+}
+.confirm p {
+  color: #ffffff;
+  font-size: 18px;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+
+.container-dictionary {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 70%;
+}
+.message {
+  color: #dc2626;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-size: 20px;
+  width: 89px;
+}
+.add {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 250px;
+  height: 38px;
+  background-color: #4763e4;
+  border: 0;
+  border-radius: 10px;
+  color: #ffffff;
+  font-size: 15px;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
+
+.table-container {
+  width: 600px;
+}
+
+.table {
+  width: 100%;
+}
+
+.tr {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.td {
+  display: flex;
+  justify-content: center;
+  font-size: 20px;
+  width: 33%;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  height: 34px;
+  margin: 3px 0;
+  border-bottom: solid #f4f4f5;
+}
+
+.td button {
+  width: 100px;
+  height: 26px;
+  border-radius: 10px;
+  background-color: #dc2626;
+  color: white;
+  border: 0;
+}
+
+.th {
+  color: #a1a1aa;
+  font-size: 16px;
+  width: 33%;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  height: 19px;
+  margin: 0 0 20px 0;
+}
+.delete {
+  width: 100px;
+  border-radius: 10px;
+  background-color: #dc2626;
+  color: white;
+  border: 0;
+}
+
+.container-quiz {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.word {
+  color: #4256d0;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.question {
+  width: 255px;
+  height: 43px;
+  background-color: #4256d0;
+  color: #ffffff;
+  text-align: center;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-size: 20px;
+  border-radius: 8px;
+  margin: 0 0 10px 0;
+}
+
+.answer {
+  width: 250px;
+  height: 38px;
+  background-color: #ffffff;
+  color: #5c73db;
+  border-radius: 12px;
+  border: 1px solid #5c73db;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-size: 16px;
+  margin: 10px;
+}
+
+.check {
+  width: 255px;
+  height: 43px;
+  background-color: #ffffff;
+  color: #5c73db;
+  text-align: center;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-size: 20px;
+  border-radius: 8px;
+  border: 1px solid #5c73db;
+  margin: 10px;
+}
+
+.quiz-message {
+  position: absolute;
+  border: 0;
+  bottom: 0;
+}
+
+.error {
+  display: flex;
+  color: #ffffff;
+  background-color: #000000;
+  justify-content: center;
+  align-items: center;
+  width: 292px;
+  height: 43px;
+  border-radius: 10px;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-size: 16px;
+}
+
+.close {
+  cursor: pointer;
+  float: right;
+  margin-left: 70px;
+  color: #dc2626;
+}
+
+.success {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #166534;
+  background-color: #dcfce7;
+  text-align: center;
+  width: 105px;
+  height: 43px;
+  border-radius: 10px;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-size: 16px;
+}
+
+.quiz {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 250px;
+  height: 38px;
+  background-color: #4763e4;
+  border: 0;
+  border-radius: 10px;
+  color: #ffffff;
+  font-size: 15px;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+}
