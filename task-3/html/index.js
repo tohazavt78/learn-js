@@ -1,12 +1,15 @@
+$(function () {
+  $("#header").load("header.html", function () {
+    let page = window.location.pathname.split("/").pop().split(".")[0];
+    openPage(page);
+  });
+});
+
 function openPage(page) {
-  if (page === "words") {
-    window.location.href = "words.html";
-  }
-  if (page === "dictionary") {
-    window.location.href = "dictionary.html";
-  }
-  if (page === "quiz") {
-    window.location.href = "quiz.html";
+  $(".header-text").removeClass("active");
+  $("#" + page + "Page").addClass("active");
+  if (page !== window.location.pathname.split("/").pop().split(".")[0]) {
+    window.location.href = page + ".html";
   }
 }
 
@@ -14,19 +17,33 @@ let wordInput = document.querySelector(".adding input");
 let translationInput = document.querySelector(".translation input");
 let confirmButton = document.querySelector(".confirm");
 
-function saveData() {
+function showToast(message) {
+  let toast = document.createElement("div");
+  toast.className = "toast";
+  toast.textContent = message;
+
+  document.body.appendChild(toast);
+
+  setTimeout(function() {
+    document.body.removeChild(toast);
+  }, 3000);
+}
+
+function addWord() {
   let word = wordInput.value;
   let translation = translationInput.value;
 
-  let data = {
+  let newWord = {
     word: word,
     translation: translation,
   };
 
-  localStorage.setItem(word, JSON.stringify(data));
+  localStorage.setItem(word, JSON.stringify(newWord));
 
   wordInput.value = "";
   translationInput.value = "";
+
+  showToast("Слово добавлено");
 }
 
 window.onload = function () {
@@ -39,15 +56,13 @@ window.onload = function () {
     message.style.display = "none";
     addButton.style.display = "none";
 
-    let div = document.createElement("div");
-    div.className = "table-container";
-    div.style.maxHeight = "223px";
-    div.style.overflow = "auto";
-    dictionaryContainer.appendChild(div);
+    let tableContainer = document.createElement("div");
+    tableContainer.className = "table-container";
+    dictionaryContainer.appendChild(tableContainer);
 
     let table = document.createElement("table");
     table.className = "table";
-    div.appendChild(table);
+    tableContainer.appendChild(table);
 
     words.sort();
 
@@ -76,16 +91,16 @@ window.onload = function () {
       tr.className = "tr";
       tbody.appendChild(tr);
 
-      let data = JSON.parse(localStorage.getItem(word));
+      const  parsedWord  = JSON.parse(localStorage.getItem(word));
 
       let tdWord = document.createElement("td");
-      tdWord.textContent = data.word;
+      tdWord.textContent =  parsedWord .word;
       tdWord.className = "td";
       tr.appendChild(tdWord);
 
       let tdTranslation = document.createElement("td");
       tdTranslation.className = "td";
-      tdTranslation.textContent = data.translation;
+      tdTranslation.textContent =  parsedWord .translation;
       tr.appendChild(tdTranslation);
 
       let tdAction = document.createElement("td");
@@ -145,9 +160,9 @@ function showWord() {
 
 function checkAnswer() {
   const userTranslation = document.getElementById("translationInput").value;
-  let data = JSON.parse(localStorage.getItem(words[currentWordIndex]));
+  let correct = JSON.parse(localStorage.getItem(words[currentWordIndex]));
 
-  if (userTranslation === data.translation) {
+  if (userTranslation === correct.translation) {
     showMessage("Ура!", true);
     currentWordIndex++;
     if (currentWordIndex === words.length) {
@@ -173,13 +188,13 @@ function showMessage(text, isSuccess) {
     messageElement.classList.add("success");
     messageElement.classList.remove("error");
     setTimeout(() => {
-      messageElement.textContent = '';
-      messageElement.classList.remove('success');
-  }, 3000);
+      messageElement.textContent = "";
+      messageElement.classList.remove("success");
+    }, 3000);
   } else {
     messageElement.classList.add("error");
     messageElement.classList.remove("success");
-    closeButton.className = 'close';
+    closeButton.className = "close";
     closeButton.textContent = "X";
     closeButton.onclick = function () {
       messageElement.textContent = "";
@@ -187,4 +202,3 @@ function showMessage(text, isSuccess) {
     };
   }
 }
-document.querySelector(".quiz").addEventListener("click", startQuiz);

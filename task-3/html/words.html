@@ -5,19 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Слова</title>
     <link rel="stylesheet" href="index.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <script
+    src="https://code.jquery.com/jquery-3.3.1.js"
+    integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+    crossorigin="anonymous">
+</script>
   </head>
   <body>
     <div class="main-container">
-      <div class="header">
-        <p class="header-text" id="addWordPage"><b>Добавление слова</b></p>
-        <p
-          class="header-text"
-          onclick="openPage('dictionary')"
-          id="dictionaryPage"
-        >
-          Словарь
-        </p>
-        <p class="header-text" onclick="openPage('quiz')" id="quizPage">Квиз</p>
+      <div class="header" id="header">
       </div>
       <div class="container-words">
         <div class="new-words adding">
@@ -28,7 +27,7 @@
           <p>Перевод</p>
           <input type="text" />
         </div>
-        <button class="confirm" type="button" onclick="saveData()">
+        <button class="confirm" type="button" onclick="addWord()">
           <p>Добавить</p>
         </button>
       </div>
