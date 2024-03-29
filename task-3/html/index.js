@@ -1,18 +1,28 @@
-$(function () {
-  $("#header").load("header.html", function () {
-    let page = window.location.pathname.split("/").pop().split(".")[0];
-    openPage(page);
-  });
-});
-
-function openPage(page) {
-  $(".header-text").removeClass("active");
-  $("#" + page + "Page").addClass("active");
-  if (page !== window.location.pathname.split("/").pop().split(".")[0]) {
-    window.location.href = page + ".html";
-  }
-}
-
+window.addEventListener('DOMContentLoaded', function()  {
+  let header = document.getElementById('header');
+  header.innerHTML = `
+  <p class="header-text" onclick="openPage('words')" id="wordsPage">Добавление слова</p>
+  <p class="header-text" onclick="openPage('dictionary')" id="dictionaryPage">Словарь</p>
+  <p class="header-text" onclick="openPage('quiz')" id="quizPage">Квиз</p>
+  `;
+   highlightActivePage(sessionStorage.getItem('activePage'));
+})
+function openPage(pageName) {
+  sessionStorage.setItem('activePage', pageName);
+  window.location.href = pageName + '.html';
+}    
+function highlightActivePage(pageName) {
+      let pages = ['words', 'dictionary', 'quiz'];
+      pages.forEach((page) => {
+        let pageElement = document.getElementById(page + 'Page');
+        if (page === pageName) {
+          pageElement.classList.add('active');
+        } else {
+          pageElement.classList.remove('active');
+        }
+      });
+    }
+    
 let wordInput = document.querySelector(".adding input");
 let translationInput = document.querySelector(".translation input");
 let confirmButton = document.querySelector(".confirm");
@@ -30,8 +40,13 @@ function showToast(message) {
 }
 
 function addWord() {
-  let word = wordInput.value;
-  let translation = translationInput.value;
+  let word = wordInput.value.trim();
+  let translation = translationInput.value.trim();
+
+  if (word === "" || translation === "") {
+    showToast("Пожалуйста, введите слово и его перевод");
+    return;
+  }
 
   let newWord = {
     word: word,
@@ -45,81 +60,55 @@ function addWord() {
 
   showToast("Слово добавлено");
 }
-
 window.onload = function () {
-  let message = document.querySelector(".message");
-  let addButton = document.querySelector(".add");
-  let dictionaryContainer = document.querySelector(".container-dictionary");
+  let messageContainer = document.querySelector(".container-message");
+  let tableContainer = document.querySelector(".table-container");
+  let tbody = document.querySelector(".tbody");
 
   let words = Object.keys(localStorage);
   if (words.length > 0) {
-    message.style.display = "none";
-    addButton.style.display = "none";
+    messageContainer.style.display = "none";
+    tableContainer.style.display = "block";
 
-    let tableContainer = document.createElement("div");
-    tableContainer.className = "table-container";
-    dictionaryContainer.appendChild(tableContainer);
+    words.sort().forEach((word) => {
+      addWordToTable(word);
+    });
+  } else {
+    messageContainer.style.display = "flex";
+  }
 
-    let table = document.createElement("table");
-    table.className = "table";
-    tableContainer.appendChild(table);
-
-    words.sort();
-
-    let thead = document.createElement("thead");
-    thead.className = "thead";
-    table.appendChild(thead);
-
-    let headers = ["Слово", "Перевод", "Действие"];
+  function addWordToTable(word) {
     let tr = document.createElement("tr");
     tr.className = "tr";
-    thead.appendChild(tr);
+    tbody.appendChild(tr);
 
-    headers.forEach((header) => {
-      let th = document.createElement("th");
-      th.className = "th";
-      th.textContent = header;
-      tr.appendChild(th);
-    });
+    const parsedWord = JSON.parse(localStorage.getItem(word));
 
-    let tbody = document.createElement("tbody");
-    tbody.className = "tbody";
-    table.appendChild(tbody);
+    let tdWord = document.createElement("td");
+    tdWord.textContent = parsedWord.word;
+    tdWord.className = "td";
+    tr.appendChild(tdWord);
 
-    words.forEach((word) => {
-      let tr = document.createElement("tr");
-      tr.className = "tr";
-      tbody.appendChild(tr);
+    let tdTranslation = document.createElement("td");
+    tdTranslation.className = "td";
+    tdTranslation.textContent = parsedWord.translation;
+    tr.appendChild(tdTranslation);
 
-      const  parsedWord  = JSON.parse(localStorage.getItem(word));
+    let tdAction = document.createElement("td");
+    tdAction.className = "td";
+    let deleteButton = document.createElement("button");
+    deleteButton.textContent = "Удалить";
+    deleteButton.onclick = function () {
+      localStorage.removeItem(word);
+      tr.remove();
 
-      let tdWord = document.createElement("td");
-      tdWord.textContent =  parsedWord .word;
-      tdWord.className = "td";
-      tr.appendChild(tdWord);
-
-      let tdTranslation = document.createElement("td");
-      tdTranslation.className = "td";
-      tdTranslation.textContent =  parsedWord .translation;
-      tr.appendChild(tdTranslation);
-
-      let tdAction = document.createElement("td");
-      tdAction.className = "td";
-      let deleteButton = document.createElement("button");
-      deleteButton.textContent = "Удалить";
-      deleteButton.onclick = function () {
-        localStorage.removeItem(word);
-        tr.remove();
-
-        if (!localStorage.length) {
-          message.style.display = "block";
-          addButton.style.display = "block";
-          table.remove();
-        }
-      };
-      tdAction.appendChild(deleteButton);
-      tr.appendChild(tdAction);
-    });
+      if (!localStorage.length) {
+        messageContainer.style.display = "flex";
+        tableContainer.style.display = "none";
+      }
+    };
+    tdAction.appendChild(deleteButton);
+    tr.appendChild(tdAction);
   }
 };
 
