@@ -60,57 +60,40 @@ function addWord() {
 
   showToast("Слово добавлено");
 }
-window.onload = function () {
-  let messageContainer = document.querySelector(".container-message");
-  let tableContainer = document.querySelector(".table-container");
-  let tbody = document.querySelector(".tbody");
-
-  let words = Object.keys(localStorage);
-  if (words.length > 0) {
-    messageContainer.style.display = "none";
-    tableContainer.style.display = "block";
-
-    words.sort().forEach((word) => {
-      addWordToTable(word);
-    });
-  } else {
-    messageContainer.style.display = "flex";
+window.addEventListener('DOMContentLoaded', function() {
+  let words = Object.keys(localStorage).map(key => JSON.parse(localStorage.getItem(key)));
+  let tableBody = document.querySelector('.tbody');
+  let message = document.querySelector('.container-message');
+  let tableContainer = document.querySelector('.table-container');
+  
+  if (!tableBody) return;
+  
+  if (words.length === 0) {
+    message.style.display = 'flex';
+    return;
   }
+  
+  message.style.display = 'none';
+  tableContainer.style.display = 'block';
+  
+  words.forEach((word) => {
+    let newTr = document.createElement('div');
+    newTr.classList.add('tr');
+    newTr.innerHTML = `
+      <div class="td">${word.word}</div>
+      <div class="td">${word.translation}</div>
+      <div class="td">
+        <button onclick="deleteWord('${word.word}')">Удалить</button>
+      </div>
+    `;
+    tableBody.appendChild(newTr);
+  });
+});
 
-  function addWordToTable(word) {
-    let tr = document.createElement("tr");
-    tr.className = "tr";
-    tbody.appendChild(tr);
-
-    const parsedWord = JSON.parse(localStorage.getItem(word));
-
-    let tdWord = document.createElement("td");
-    tdWord.textContent = parsedWord.word;
-    tdWord.className = "td";
-    tr.appendChild(tdWord);
-
-    let tdTranslation = document.createElement("td");
-    tdTranslation.className = "td";
-    tdTranslation.textContent = parsedWord.translation;
-    tr.appendChild(tdTranslation);
-
-    let tdAction = document.createElement("td");
-    tdAction.className = "td";
-    let deleteButton = document.createElement("button");
-    deleteButton.textContent = "Удалить";
-    deleteButton.onclick = function () {
-      localStorage.removeItem(word);
-      tr.remove();
-
-      if (!localStorage.length) {
-        messageContainer.style.display = "flex";
-        tableContainer.style.display = "none";
-      }
-    };
-    tdAction.appendChild(deleteButton);
-    tr.appendChild(tdAction);
-  }
-};
+function deleteWord(word) {
+  localStorage.removeItem(word);
+  location.reload();
+}
 
 let words = Object.keys(localStorage);
 let currentWordIndex = 0;
