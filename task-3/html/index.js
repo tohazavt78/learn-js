@@ -62,11 +62,11 @@ function addWord() {
 }
 window.addEventListener('DOMContentLoaded', function() {
   let words = Object.keys(localStorage).map(key => JSON.parse(localStorage.getItem(key)));
-  let tableBody = document.querySelector('.tbody');
+  let tbody = document.querySelector('.tbody');
   let message = document.querySelector('.container-message');
   let tableContainer = document.querySelector('.table-container');
   
-  if (!tableBody) return;
+  if (!tbody) return;
   
   if (words.length === 0) {
     message.style.display = 'flex';
@@ -76,17 +76,17 @@ window.addEventListener('DOMContentLoaded', function() {
   message.style.display = 'none';
   tableContainer.style.display = 'block';
   
-  words.forEach((word) => {
-    let newTr = document.createElement('div');
+  words.forEach((data) => {
+    let newTr = document.createElement('tr');
     newTr.classList.add('tr');
     newTr.innerHTML = `
-      <div class="td">${word.word}</div>
-      <div class="td">${word.translation}</div>
-      <div class="td">
-        <button onclick="deleteWord('${word.word}')">Удалить</button>
-      </div>
+      <td class="td">${data.word}</td>
+      <td class="td">${data.translation}</td>
+      <td class="td">
+        <button onclick="deleteWord('${data.word}')">Удалить</button>
+      </td>
     `;
-    tableBody.appendChild(newTr);
+    tbody.appendChild(newTr);
   });
 });
 
