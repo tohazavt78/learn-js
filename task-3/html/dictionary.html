@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Слова</title>
+    <link rel="stylesheet" href="index.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <div class="main-container">
+      <div class="header" id="header"></div>
+      <div class="container-dictionary">
+        <div class="container-message">
+          <p class="message"><u>Слов нет</u></p>
+          <button class="add" type="button" onclick="window.location.href = 'words.html'">
+            <p>Добавить слово</p>
+          </button>
+        </div>
+        <div class="table-container" >
+          <table class="table">
+            <thead class="thead">
+              <tr class="tr">
+                <th class="th">Слово</th>
+                <th class="th">Перевод</th>
+                <th class="th">Действие</th>
+              </tr>
+            </thead>
+            <tbody class="tbody">
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <script src="index.js"></script>
+  </body>
+</html>
