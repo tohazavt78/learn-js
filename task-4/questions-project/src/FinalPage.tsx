@@ -1,67 +1,42 @@
 import React from "react";
-import styled from 'styled-components';
+import {
+  VariantImage,
+  VariantText,
+  RewardText,
+  Main,
+  Congrats,
+  Choice,
+  Variant,
+} from "./FinalPage.styled";
 
-const VariantImage = styled.img`
-  margin-top: 70px;
-  object-fit: cover;
-  width: 250px;
-  height: 175px;
-`;
-
-const VariantText = styled.p`
-  font-size: 20px;
-  margin-top: 5px;
-`;
-
-const RewardText = styled.p`
-  font-size: 26px;
-  margin: 70px;
-`;
-
-const Main = styled.div`
-  display: flex;
-  margin: 0 100px;
-  height: 90vh;
-  flex-direction: column;
-  align-items: center;
-  background-color: #e3ffee;
-`;
-
-const Congrats = styled.h1`
-  color: black;
-  margin: 40px 0 20px;
-  font-size: 35px;
-`;
-
-const Choice = styled.div`
-  display: flex;
-  width: 90%;
-  justify-content: space-around;
-`;
-
-const Variant = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-`;
+const ANIMAL_VARIANTS = [
+  {
+    src: "images/chelsea.jpg",
+    name: "Челси",
+  },
+  {
+    src: "images/patrick.jpg",
+    name: "Патрик",
+  },
+  {
+    src: "images/gerda.jpg",
+    name: "Герда",
+  },
+];
 
 function FinalPage() {
   return (
     <Main>
-      <Congrats><b>Поздравляем, вы прошли игру!!!</b></Congrats>
+      <Congrats>
+        <b>Поздравляем, вы прошли игру!!!</b>
+      </Congrats>
       <Choice>
-        <Variant>
-          <VariantImage src="images/chelsea.jpg" />
-          <VariantText>Челси</VariantText>
-        </Variant>
-        <Variant>
-          <VariantImage src="images/patrick.jpg" />
-          <VariantText>Патрик</VariantText>
-        </Variant>
-        <Variant>
-          <VariantImage src="images/gerda.jpg" />
-          <VariantText>Герда</VariantText>
-        </Variant>
+        {ANIMAL_VARIANTS.map((variant, index) => (
+          <Variant key={index}>
+            <VariantImage src={variant.src} />
+            <VariantText>{variant.name}</VariantText>
+          </Variant>
+        ))}
       </Choice>
       <RewardText>Выбирайте 🎉</RewardText>
     </Main>
