@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+
 import FinalPage from "./FinalPage";
 import { QUESTIONS } from "./utils/constant";
 import {

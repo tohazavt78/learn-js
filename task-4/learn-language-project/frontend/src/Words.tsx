@@ -1,0 +1,78 @@
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+
+import {
+  ContainerWords,
+  NewWords,
+  NewWordsP,
+  NewWordsInput,
+  Confirm,
+  ConfirmP,
+  Toast,
+} from "./Words.styled";
+
+interface Word {
+  word: string;
+  translation: string;
+}
+
+const Words = () => {
+  const [words, setWords] = useState<Word[]>([]);
+  const [word, setWord] = useState("");
+  const [translation, setTranslation] = useState("");
+  const [toastMessage, setToastMessage] = useState("");
+
+  useEffect(() => {
+    axios.get("/api/words").then((response) => {
+      setWords(response.data);
+    });
+  }, []);
+
+  const showToast = (message: React.SetStateAction<string>) => {
+    setToastMessage(message);
+    setTimeout(() => {
+      setToastMessage("");
+    }, 3000);
+  };
+
+  const addWord = () => {
+    if (word === "" || translation === "") {
+      showToast("Пожалуйста, введите слово и его перевод");
+      return;
+    }
+
+    axios.post("/api/words", { word, translation }).then((response) => {
+      setWords([...words, response.data]);
+      setWord("");
+      setTranslation("");
+      showToast("Слово добавлено");
+    });
+  };
+
+  return (
+    <ContainerWords>
+      <NewWords>
+        <NewWordsP>Слово</NewWordsP>
+        <NewWordsInput
+          type="text"
+          onChange={(e) => setWord(e.target.value)}
+          value={word}
+        />
+      </NewWords>
+      <NewWords>
+        <NewWordsP>Перевод</NewWordsP>
+        <NewWordsInput
+          type="text"
+          onChange={(e) => setTranslation(e.target.value)}
+          value={translation}
+        />
+      </NewWords>
+      <Confirm onClick={addWord}>
+        <ConfirmP>Добавить</ConfirmP>
+      </Confirm>
+      {toastMessage && <Toast>{toastMessage}</Toast>}
+    </ContainerWords>
+  );
+};
+
+export default Words;
