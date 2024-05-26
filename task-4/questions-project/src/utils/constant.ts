@@ -42,3 +42,18 @@ export const QUESTIONS = [
     correct: "B",
   },
 ];
+
+export const ANIMAL_VARIANTS = [
+  {
+    src: "images/chelsea.jpg",
+    name: "Челси",
+  },
+  {
+    src: "images/patrick.jpg",
+    name: "Патрик",
+  },
+  {
+    src: "images/gerda.jpg",
+    name: "Герда",
+  },
+];

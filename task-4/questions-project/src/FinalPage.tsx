@@ -1,4 +1,6 @@
 import React from "react";
+
+import { ANIMAL_VARIANTS } from "./utils/constant";
 import {
   VariantImage,
   VariantText,
@@ -8,21 +10,6 @@ import {
   Choice,
   Variant,
 } from "./FinalPage.styled";
-
-const ANIMAL_VARIANTS = [
-  {
-    src: "images/chelsea.jpg",
-    name: "Челси",
-  },
-  {
-    src: "images/patrick.jpg",
-    name: "Патрик",
-  },
-  {
-    src: "images/gerda.jpg",
-    name: "Герда",
-  },
-];
 
 function FinalPage() {
   return (

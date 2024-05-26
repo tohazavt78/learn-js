@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import axios from "axios";
 
 import {
@@ -35,20 +35,20 @@ const Words = () => {
     }, 3000);
   };
 
-  const addWord = () => {
+  const addWord = useCallback(() => {
     if (word === "" || translation === "") {
       showToast("Пожалуйста, введите слово и его перевод");
       return;
     }
-
+  
     axios.post("/api/words", { word, translation }).then((response) => {
-      setWords([...words, response.data]);
+      setWords(prevWords => [...prevWords, response.data]);
       setWord("");
       setTranslation("");
       showToast("Слово добавлено");
     });
-  };
-
+  }, [word, translation, words]);
+  
   return (
     <ContainerWords>
       <NewWords>
