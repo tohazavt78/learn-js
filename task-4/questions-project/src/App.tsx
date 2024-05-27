@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import FinalPage from "./FinalPage";
 import { QUESTIONS } from "./utils/constant";
+import { RED_COLOR } from "./utils/constant";
+import { GREEN_COLOR } from "./utils/constant";
 import {
   QuestionHeader,
   MainContainer,
@@ -15,59 +17,29 @@ const CORRECT_ANSWER_MESSAGE = "Вы ответили верно!";
 
 function App() {
   const [questionIndex, setQuestionIndex] = useState(0);
-  const [answerAStyle, setAnswerAStyle] = useState("");
-  const [answerBStyle, setAnswerBStyle] = useState("");
-  const [textA, setTextA] = useState("");
-  const [textB, setTextB] = useState("");
+  const [clickedAnswer, setClickedAnswer] = useState<string | null>(null);
   const [isFinalPage, setIsFinalPage] = useState(false);
 
-  function onAnswerClick(answer: string) {
+  useEffect(() => {
+    if (clickedAnswer === null) return;
+
     const correctAnswer = QUESTIONS[questionIndex].correct;
-    if (answer === correctAnswer) {
-      onRightAnswerClick(answer);
+    if (clickedAnswer === correctAnswer) {
+      setTimeout(() => {
+        if (questionIndex !== QUESTIONS.length - 1) {
+          setQuestionIndex(questionIndex + 1);
+        } else {
+          setIsFinalPage(true);
+        }
+        setClickedAnswer(null);
+      }, 3000);
     } else {
-      onWrongAnswerClick(answer);
+      alert("Вы ошиблись, попробуйте ещё раз");
+      setTimeout(() => {
+        setClickedAnswer(null);
+      }, 3000);
     }
-  }
-
-  function onRightAnswerClick(answer: string) {
-    if (answer === "A") {
-      setTextA(CORRECT_ANSWER_MESSAGE);
-      setAnswerAStyle("#E3FFEE");
-    }
-    if (answer === "B") {
-      setTextB(CORRECT_ANSWER_MESSAGE);
-      setAnswerBStyle("#E3FFEE");
-    }
-    setTimeout(() => {
-      if (answer === "A") {
-        setTextA("");
-        setAnswerAStyle("");
-      }
-      if (answer === "B") {
-        setTextB("");
-        setAnswerBStyle("");
-      }
-      if (questionIndex !== QUESTIONS.length - 1) {
-        setQuestionIndex(questionIndex + 1);
-      } else {
-        setIsFinalPage(true);
-      }
-    }, 3000);
-  }
-
-  function onWrongAnswerClick(answer: string) {
-    if (answer === "A") {
-      setAnswerAStyle("#FFEAE3");
-    } else {
-      setAnswerBStyle("#FFEAE3");
-    }
-    setTimeout(() => {
-      setAnswerAStyle("");
-      setAnswerBStyle("");
-    }, 3000);
-    alert("Вы ошиблись, попробуйте ещё раз");
-  }
+  }, [clickedAnswer]);
 
   if (isFinalPage) {
     return <FinalPage />;
@@ -78,20 +50,47 @@ function App() {
       <QuestionHeader>{QUESTIONS[questionIndex].question}</QuestionHeader>
       <MainContainer>
         <Container>
-          <Answer color={answerAStyle} onClick={() => onAnswerClick("A")}>
+          <Answer
+            color={
+              clickedAnswer === "A"
+                ? clickedAnswer === QUESTIONS[questionIndex].correct
+                  ? GREEN_COLOR
+                  : RED_COLOR
+                : ""
+            }
+            onClick={() => setClickedAnswer("A")}
+          >
             <QuestionImage src={QUESTIONS[questionIndex].answer.a.image} />
             <h2>{QUESTIONS[questionIndex].answer.a.label}</h2>
-            <AnswerText>{textA}</AnswerText>
+            <AnswerText>
+              {clickedAnswer === "A" &&
+              clickedAnswer === QUESTIONS[questionIndex].correct
+                ? CORRECT_ANSWER_MESSAGE
+                : ""}
+            </AnswerText>
           </Answer>
-          <Answer color={answerBStyle} onClick={() => onAnswerClick("B")}>
+          <Answer
+            color={
+              clickedAnswer === "B"
+                ? clickedAnswer === QUESTIONS[questionIndex].correct
+                  ? GREEN_COLOR
+                  : RED_COLOR
+                : ""
+            }
+            onClick={() => setClickedAnswer("B")}
+          >
             <QuestionImage src={QUESTIONS[questionIndex].answer.b.image} />
             <h2>{QUESTIONS[questionIndex].answer.b.label}</h2>
-            <AnswerText>{textB}</AnswerText>
+            <AnswerText>
+              {clickedAnswer === "B" &&
+              clickedAnswer === QUESTIONS[questionIndex].correct
+                ? CORRECT_ANSWER_MESSAGE
+                : ""}
+            </AnswerText>
           </Answer>
         </Container>
       </MainContainer>
     </div>
   );
 }
-
 export default App;

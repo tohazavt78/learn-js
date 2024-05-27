@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 
 import {
@@ -20,10 +20,8 @@ interface Word {
   translation: string;
 }
 
-const Dictionary = () => {
+export const Dictionary = () => {
   const [words, setWords] = useState<Word[]>([]);
-  const messageRef = useRef<HTMLDivElement | null>(null);
-  const tableContainerRef = useRef<HTMLDivElement | null>(null);
 
   const deleteWord = (wordToDelete: string) => {
     axios
@@ -39,18 +37,6 @@ const Dictionary = () => {
       setWords(response.data);
     });
   }, []);
-
-  useEffect(() => {
-    if (words.length === 0) {
-      if (messageRef.current) messageRef.current.style.display = "flex";
-      if (tableContainerRef.current)
-        tableContainerRef.current.style.display = "none";
-    } else {
-      if (messageRef.current) messageRef.current.style.display = "none";
-      if (tableContainerRef.current)
-        tableContainerRef.current.style.display = "block";
-    }
-  }, [words]);
 
   return (
     <ContainerDictionary>
@@ -90,5 +76,3 @@ const Dictionary = () => {
     </ContainerDictionary>
   );
 };
-
-export default Dictionary;

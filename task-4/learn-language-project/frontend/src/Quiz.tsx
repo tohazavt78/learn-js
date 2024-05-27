@@ -19,41 +19,34 @@ interface Word {
   translation: string;
 }
 
-const Quiz = () => {
-  const [words, setWords] = useState([]);
-  const [currentWord, setCurrentWord] = useState<Word | null>(null);
+export const Quiz = () => {
   const [userAnswer, setUserAnswer] = useState("");
   const [isQuizStarted, setIsQuizStarted] = useState(false);
   const [message, setMessage] = useState("");
-  const [quizWords, setQuizWords] = useState([]);
+  const [quizWords, setQuizWords] = useState<Word[]>([]);
   const [isCorrect, setIsCorrect] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
-
-  useEffect(() => {
-    axios.get("/api/words").then((response) => {
-      setWords(response.data);
-    });
-  }, []);
 
   const startQuiz = async () => {
     setIsQuizStarted(true);
     const response = await axios.get("/api/words");
     const shuffledWords = response.data.sort(() => 0.5 - Math.random());
     setQuizWords(shuffledWords.slice(0, 20));
-    setCurrentWord(shuffledWords[0]);
     setCurrentIndex(0);
   };
 
   const checkAnswer = () => {
-    if (currentWord && userAnswer === currentWord.translation) {
+    if (
+      quizWords[currentIndex] &&
+      userAnswer === quizWords[currentIndex].translation
+    ) {
       setMessage("Ура!");
       setIsCorrect(true);
       setTimeout(() => {
         setMessage("");
         if (currentIndex + 1 < quizWords.length) {
           setCurrentIndex(currentIndex + 1);
-          setCurrentWord(quizWords[currentIndex + 1]);
-          setUserAnswer(""); // Переместите сюда
+          setUserAnswer("");
         } else {
           alert("Тест завершён");
           setIsQuizStarted(false);
@@ -78,7 +71,7 @@ const Quiz = () => {
           <Question
             type="text"
             readOnly
-            value={currentWord ? currentWord.word : ""}
+            value={quizWords[currentIndex] ? quizWords[currentIndex].word : ""}
           />
           <Answer
             type="text"
@@ -103,5 +96,3 @@ const Quiz = () => {
     </ContainerQuiz>
   );
 };
-
-export default Quiz;

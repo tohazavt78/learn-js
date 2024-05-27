@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import Words from "./Words";
-import Dictionary from "./Dictionary";
-import Quiz from "./Quiz";
+import { Words } from "./Words";
+import { Dictionary } from "./Dictionary";
+import { Quiz } from "./Quiz";
 
 const MainContainer = styled.div`
   display: flex;

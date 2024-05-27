@@ -43,6 +43,9 @@ export const QUESTIONS = [
   },
 ];
 
+export const RED_COLOR = "#FFEAE3";
+export const GREEN_COLOR = "#E3FFEE";
+
 export const ANIMAL_VARIANTS = [
   {
     src: "images/chelsea.jpg",

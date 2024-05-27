@@ -16,17 +16,11 @@ interface Word {
   translation: string;
 }
 
-const Words = () => {
+export const Words = () => {
   const [words, setWords] = useState<Word[]>([]);
   const [word, setWord] = useState("");
   const [translation, setTranslation] = useState("");
   const [toastMessage, setToastMessage] = useState("");
-
-  useEffect(() => {
-    axios.get("/api/words").then((response) => {
-      setWords(response.data);
-    });
-  }, []);
 
   const showToast = (message: React.SetStateAction<string>) => {
     setToastMessage(message);
@@ -40,15 +34,15 @@ const Words = () => {
       showToast("Пожалуйста, введите слово и его перевод");
       return;
     }
-  
+
     axios.post("/api/words", { word, translation }).then((response) => {
-      setWords(prevWords => [...prevWords, response.data]);
+      setWords((prevWords) => [...prevWords, response.data]);
       setWord("");
       setTranslation("");
       showToast("Слово добавлено");
     });
   }, [word, translation, words]);
-  
+
   return (
     <ContainerWords>
       <NewWords>
@@ -74,5 +68,3 @@ const Words = () => {
     </ContainerWords>
   );
 };
-
-export default Words;
