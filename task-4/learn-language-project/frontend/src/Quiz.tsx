@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 
 import {
@@ -71,7 +71,7 @@ export const Quiz = () => {
           <Question
             type="text"
             readOnly
-            value={quizWords[currentIndex] ? quizWords[currentIndex].word : ""}
+            value={quizWords[currentIndex] ?.word || ""}
           />
           <Answer
             type="text"
